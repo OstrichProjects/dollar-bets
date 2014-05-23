@@ -3,31 +3,35 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 
 class BetUser(models.Model):
-	user = models.OneToOneField(User)
+    user = models.OneToOneField(User)
 
-	# Extend User model to include Venmo Authorization Information
-	venmoid = models.CharField(unique=True)
-	venmoname = models.CharField(unique=True)
-	access_token = models.CharField()
-	refresh_token = models.CharField()
+    # Extend User model to include Venmo Authorization Information
+    venmoid = models.CharField(max_length=200,unique=True)
+    venmoname = models.CharField(max_length=200,unique=True)
+    access_token = models.CharField(max_length=200,)
+    refresh_token = models.CharField(max_length=200,)
 
-	def getfriends(self):
-		return Friendship.objects.filter(Q(to_user=self)|Q(from_user=self))
+    def getfriends(self):
+        friends = []
+        for friendship in Friendship.filter(from_user=user):
+            friends.append({"friend": friendship.to_user})
+        for friendship in self.filter(to_user=user).select_related(depth=1):
+            friends.append({"friend": friendship.from_user})
+        return friends
 
-	class Meta:
-		return self.user.username
-
+    def __unicode__(self):
+        return self.user.username
 
 class Bet(models.Model):
-	bet = models.CharField(max_length=140)
-	bettor = models.ForeignKey(User)
-	bettee = models.ForeignKey(User)
-	won = models.BooleanField(default=False)
-	paid = models.BooleanField(default=False)
-	winner = models.ForeignKey(User)
+    bet = models.CharField(max_length=140)
+    bettor = models.ForeignKey(User, related_name="made")
+    bettee = models.ForeignKey(User, related_name="accepted")
+    won = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)
+    winner = models.ForeignKey(User, null=True)
 
-	def __unicode__(self):
-		return self.bet[:10]
+    def __unicode__(self):
+        return self.bet[:10]
 
 class Friendship(models.Model):    
     to_user = models.ForeignKey(BetUser, related_name="friends")

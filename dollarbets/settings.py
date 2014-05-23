@@ -15,7 +15,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_PATH = os.path.join(PROJECT_PATH, 'rango.db')
+DATABASE_PATH = os.path.join(PROJECT_PATH, 'bets.db')
 
 DATABASES = {
     'default': {
@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'bets',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
