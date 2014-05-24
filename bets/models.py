@@ -13,10 +13,10 @@ class BetUser(models.Model):
 
     def getfriends(self):
         friends = []
-        for friendship in Friendship.filter(from_user=user):
-            friends.append({"friend": friendship.to_user})
-        for friendship in self.filter(to_user=user).select_related(depth=1):
-            friends.append({"friend": friendship.from_user})
+        for friendship in Friendship.objects.filter(from_user=self.user):
+            friends.append(friendship.to_user.user)
+        for friendship in Friendship.objects.filter(to_user=self.user).select_related(depth=1):
+            friends.append(friendship.from_user.user)
         return friends
 
     def __unicode__(self):

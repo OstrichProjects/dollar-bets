@@ -9,6 +9,9 @@ SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 
+CLIENT_ID = "1636"
+CLIENT_SECRET = "WYXLq7hfvjZ9QV4Hff2Jy5fqtQZ5VDcM"
+
 ADMINS = (
     'Jonathan Ostrander', 'jonathanost@gmail.com',
 )
@@ -146,6 +149,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'bets',
+    'requests',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
