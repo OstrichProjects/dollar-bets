@@ -13,9 +13,9 @@ class BetUser(models.Model):
 
     def getfriends(self):
         friends = []
-        for friendship in Friendship.objects.filter(from_user=self.user):
+        for friendship in Friendship.objects.filter(from_user=self):
             friends.append(friendship.to_user.user)
-        for friendship in Friendship.objects.filter(to_user=self.user).select_related(depth=1):
+        for friendship in Friendship.objects.filter(to_user=self):
             friends.append(friendship.from_user.user)
         return friends
 
@@ -39,3 +39,6 @@ class Friendship(models.Model):
     
     class Meta:
         unique_together = (('to_user', 'from_user'),)
+
+    def __unicode__(self):
+        return self.to_user.user.username + "|" + self.from_user.user.username

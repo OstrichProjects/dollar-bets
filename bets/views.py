@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponse
 from rest_framework.decorators import action, link
@@ -16,7 +17,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @link()
     def friends(self, request, pk=None):
-        user = BetUser.objects.get(pk=pk)
+        user = User.objects.get(pk=pk)
+        user = BetUser.objects.get(venmoname=user.username)
         queryset = user.getfriends()
         if len(queryset)>1:
             serializer = UserSerializer(queryset,many=True)
@@ -42,7 +44,7 @@ def venmoauth(request):
     try:
         user = User.objects.get(username=username)
         try:
-            BetUser.objects.get(user=user)
+            betuser = BetUser.objects.get(user=user)
         except BetUser.DoesNotExist:
             betuser = BetUser()
             betuser.user = user
@@ -61,9 +63,11 @@ def venmoauth(request):
         user.save()
         betuser = BetUser()
         betuser.user = user
-        betuser.venmoid = vuser.id
+        betuser.venmoid = vuser['id']
         betuser.venmoname = username
         betuser.access_token = access_token
         betuser.refresh_token = refresh_token
         betuser.save()
+    user.backend = 'django.contrib.auth.backends.ModelBackend'
+    login(request, user)
     return HttpResponseRedirect('/api/v1/')
