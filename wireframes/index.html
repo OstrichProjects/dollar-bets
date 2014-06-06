@@ -14,6 +14,7 @@
 
   </head>
   <body>
+    <script type="text/x-handlebars" data-template-name="index">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <ul class="nav navbar-nav navbar-left brand">
@@ -24,27 +25,65 @@
         </ul>
       </div>
 
-    <div class="main container">
-      <div class="bet">
-        <span class="bettor">
-          <img style="border-radius:16px; margin-right: 4px;" src="http://www.gravatar.com/avatar/e74a00456e442b3a2d0062c94095f002?s=32" />
-          Jonathan
-        </span>
-        bets
-        <span class="bettee">
-          Bettee
-        </span>
-        that this isn't a test bet.
+      <div class="main container">
+        <div class="row">
+          <form class="new-post col-md-12">
+            I bet 
+            <input type="text" placeholder="friend">
+            that
+            <input type="text" placeholder="bet">
+            <button type="submit">BET!</button>
+          </form>
+        </div>
+        <div class="row">
+          <ul class="container col-md-8">
+            <li class="bet">
+              <span class="bettor">
+                <img style="border-radius:16px; margin-right: 4px;" src="http://www.gravatar.com/avatar/e74a00456e442b3a2d0062c94095f002?s=32" />
+                Jonathan
+              </span>
+              bets
+              <span class="bettee">
+                Bettee
+              </span>
+              that this isn't a test bet.
+              <div class="mod-btns">
+                <button class="won">I won!</button>
+                <button class="lost">I lost...</button>
+                <button class="delete">delete</button>
+              </div>
+            </li>
+            <li class="bet">
+              <span class="bettor">
+                <img style="border-radius:16px; margin-right: 4px;" src="http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a?s=32" />
+                Tomster
+              </span>
+              bets
+              <span class="bettee">
+                Jonathan
+              </span>
+              that he will use Ember.
+              <div class="mod-btns">
+                <button class="won">I won!</button>
+                <button class="lost">I lost...</button>
+                <button class="delete">delete</button>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <footer>
-      <p>&copy; <a target="_blank" href="http://jonost.me">Jonathan Ostrander</a> | Powered by <a target="_blank" href="https://venmo.com">Venmo</a></p>
-    </footer>
-  </div>
+      <footer>
+        <p>&copy; <a target="_blank" href="http://jonost.me">Jonathan Ostrander</a> | Powered by <a target="_blank" href="https://venmo.com">Venmo</a></p>
+      </footer>
+  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+  <script src="js/vendor/handlebars-1.1.2.js"></script>
+  <script src="js/vendor/ember-1.5.1.js"></script>
+  <script src="js/vendor/ember-data.js"></script>
+  <script src="js/vendor/ember-data-django-rest-adapter.js"></script>
   <script src="js/vendor/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/app.js"></script>
   </body>
 </html>

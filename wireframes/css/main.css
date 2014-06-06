@@ -1,12 +1,16 @@
 html,
 body {
-   margin:0;
-   padding:0;
-   min-height:100vh;
+   position: absolute;
+   top:0;
+   left:0;
+   right: 0;
+   margin: 0;
+   padding: 0;
+   height: 100%;
 }
 
 body {
-	background: url(../img/shattered.png);
+	background: url(../img/blu_stripes.png);
 }
 
 .nav > li > a {
@@ -18,14 +22,47 @@ body {
 }
 
 .main {
-	padding-bottom:20px;   /* Height of the footer */
+	padding-bottom:40px;   /* Height of the footer */
+}
+
+.new-post {
+   text-align: center;
+}
+
+.bet {
+   list-style-type: none;
+   padding: 15px;
+   border: 2px solid white;
+   border-radius: 10px;
+   text-align: center;
+   margin-bottom: 10px;
+}
+
+.bet:last-child {
+   margin-bottom: 0;
+}
+
+.mod-btns {
+   text-align: center;
+}
+
+.mod-btns > button {
+   background: none;
+   border: none;
+   font-weight: bold;
+   color: blue;
+   outline: none;
+   transition: 0.3s;
+}
+
+.mod-btns > button:hover {
+   opacity: 0.5;
 }
 
 footer {
    position: absolute;
    bottom: 0;
+   height: 40px;
    width: 100%;
-   height: 20px;   /* Height of the footer */
-   background: #6cf;
    text-align: center;
 }
